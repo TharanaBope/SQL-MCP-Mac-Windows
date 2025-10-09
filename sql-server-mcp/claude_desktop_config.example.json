@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "sql-server": {
+      "command": "node",
+      "args": ["D:\\Medical Wizard\\VFP Entire Codebase\\MCP\\sql-server-mcp\\dist\\index.js"],
+      "env": {
+        "SQL_SERVER": "localhost",
+        "SQL_DATABASE": "master",
+        "SQL_USE_WINDOWS_AUTH": "true",
+        "SQL_PORT": "1433",
+        "QUERY_TIMEOUT": "30",
+        "MAX_RESULT_ROWS": "1000",
+        "ENABLE_SCHEMA_CACHE": "true",
+        "CACHE_TTL_MINUTES": "60"
+      }
+    }
+  }
+}
