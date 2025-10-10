@@ -1,0 +1,31 @@
+{
+  "name": "sql-server-mcp-mac",
+  "version": "1.0.0",
+  "description": "MCP server for SQL Server database exploration and RAG capabilities (macOS version)",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "sql-server",
+    "database",
+    "rag",
+    "macos"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "mssql": "^11.0.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/mssql": "^9.1.8",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
