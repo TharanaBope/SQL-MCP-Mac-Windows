@@ -1,13 +1,29 @@
 {
-  "name": "sql-server-mcp",
+  "name": "@tharanabope/sql-server-mcp",
   "version": "1.0.0",
-  "description": "MCP server for SQL Server database exploration and RAG capabilities",
+  "description": "MCP server for SQL Server database exploration and RAG capabilities (Windows with native ODBC support)",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "sql-server-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "keywords": [
     "mcp",

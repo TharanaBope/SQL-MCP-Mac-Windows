@@ -33,9 +33,53 @@ This repository contains **two platform-specific implementations**:
 
 ## 📦 Installation
 
-Choose the version for your platform and follow its README:
+### 🚀 Quick Start (Recommended)
 
-### Windows
+No installation needed! Just add to your Claude Desktop configuration:
+
+#### **Windows**
+```json
+{
+  "mcpServers": {
+    "sql-server": {
+      "command": "npx",
+      "args": ["-y", "@tharanabope/sql-server-mcp@latest"],
+      "env": {
+        "SQL_SERVER": "localhost",
+        "SQL_DATABASE": "master",
+        "SQL_USE_WINDOWS_AUTH": "true"
+      }
+    }
+  }
+}
+```
+
+#### **macOS**
+```json
+{
+  "mcpServers": {
+    "sql-server": {
+      "command": "npx",
+      "args": ["-y", "@tharanabope/sql-server-mcp-macos@latest"],
+      "env": {
+        "SQL_SERVER": "localhost",
+        "SQL_DATABASE": "master",
+        "SQL_USE_WINDOWS_AUTH": "false",
+        "SQL_USERNAME": "sa",
+        "SQL_PASSWORD": "your_password"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop and you're ready to go!
+
+### 🛠️ Development Setup
+
+For development or local modifications:
+
+#### Windows
 ```bash
 cd sql-server-mcp
 npm install
@@ -43,7 +87,7 @@ npm run build
 ```
 👉 **[Complete Windows Setup Instructions](./sql-server-mcp/README.md)**
 
-### macOS
+#### macOS
 ```bash
 cd sql-server-mcp-mac
 npm install

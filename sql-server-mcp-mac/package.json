@@ -1,13 +1,29 @@
 {
-  "name": "sql-server-mcp-mac",
+  "name": "@tharanabope/sql-server-mcp-macos",
   "version": "1.0.0",
-  "description": "MCP server for SQL Server database exploration and RAG capabilities (macOS version)",
+  "description": "MCP server for SQL Server database exploration and RAG capabilities (macOS with Docker SQL Server support)",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "sql-server-mcp-macos": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "keywords": [
     "mcp",
