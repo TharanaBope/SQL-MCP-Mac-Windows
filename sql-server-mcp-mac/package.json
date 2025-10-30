@@ -1,5 +1,5 @@
 {
-  "name": "@tharanabope/sql-server-mcp-macos",
+  "name": "@tharanabopearachchi/sql-server-mcp-macos",
   "version": "1.0.0",
   "description": "MCP server for SQL Server database exploration and RAG capabilities (macOS with Docker SQL Server support)",
   "type": "module",

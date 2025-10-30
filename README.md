@@ -3,6 +3,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/MCP-1.0-green)](https://github.com/modelcontextprotocol)
+[![npm version](https://img.shields.io/npm/v/@tharanabopearachchi/sql-server-mcp.svg)](https://www.npmjs.com/package/@tharanabopearachchi/sql-server-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/@tharanabopearachchi/sql-server-mcp.svg)](https://www.npmjs.com/package/@tharanabopearachchi/sql-server-mcp)
 
 A **Model Context Protocol (MCP)** server implementation for SQL Server that enables AI assistants (like Claude and LM Studio) to explore and query SQL Server databases through natural language. Built as a RAG (Retrieval-Augmented Generation) system optimized for database knowledge exploration.
 
@@ -43,7 +45,7 @@ No installation needed! Just add to your Claude Desktop configuration:
   "mcpServers": {
     "sql-server": {
       "command": "npx",
-      "args": ["-y", "@tharanabope/sql-server-mcp@latest"],
+      "args": ["-y", "@tharanabopearachchi/sql-server-mcp@latest"],
       "env": {
         "SQL_SERVER": "localhost",
         "SQL_DATABASE": "master",
@@ -60,7 +62,7 @@ No installation needed! Just add to your Claude Desktop configuration:
   "mcpServers": {
     "sql-server": {
       "command": "npx",
-      "args": ["-y", "@tharanabope/sql-server-mcp-macos@latest"],
+      "args": ["-y", "@tharanabopearachchi/sql-server-mcp-macos@latest"],
       "env": {
         "SQL_SERVER": "localhost",
         "SQL_DATABASE": "master",

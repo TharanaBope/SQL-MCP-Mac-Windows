@@ -1,11 +1,11 @@
 {
-  "name": "@tharanabope/sql-server-mcp",
+  "name": "@tharanabopearachchi/sql-server-mcp",
   "version": "1.0.0",
   "description": "MCP server for SQL Server database exploration and RAG capabilities (Windows with native ODBC support)",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "sql-server-mcp": "./dist/index.js"
+    "sql-server-mcp": "dist/index.js"
   },
   "files": [
     "dist",
@@ -34,7 +34,7 @@
   "author": "Tharana Bope <tharanabope@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows.git"
+    "url": "git+https://github.com/TharanaBope/SQL-MCP-Mac-Windows.git"
   },
   "bugs": {
     "url": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows/issues"
