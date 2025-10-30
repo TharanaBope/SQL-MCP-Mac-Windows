@@ -59,7 +59,7 @@ SQL_SERVER=localhost              # Your Docker SQL Server
 SQL_DATABASE=master               # Or your database name
 SQL_USE_WINDOWS_AUTH=false       # MUST be false on Mac!
 SQL_USERNAME=sa                   # SQL authentication
-SQL_PASSWORD=gukukr6rg#67        # Your Docker password
+SQL_PASSWORD=YOUR_STRONG_PASSWORD_HERE        # Your Docker password
 ```
 
 ### 4. Configure LM Studio
@@ -86,7 +86,7 @@ Location: `~/Library/Application Support/LMStudio/mcp.json`
         "SQL_SERVER": "localhost",
         "SQL_DATABASE": "master",
         "SQL_USERNAME": "sa",
-        "SQL_PASSWORD": "gukukr6rg#67",
+        "SQL_PASSWORD": "YOUR_STRONG_PASSWORD_HERE",
         "SQL_USE_WINDOWS_AUTH": "false"
       }
     }
@@ -101,7 +101,7 @@ Location: `~/Library/Application Support/LMStudio/mcp.json`
 **Test SQL Server connection:**
 ```bash
 docker exec -it sql1 /opt/mssql-tools18/bin/sqlcmd \
-  -S localhost -U sa -P 'gukukr6rg#67' \
+  -S localhost -U sa -P 'YOUR_STRONG_PASSWORD_HERE' \
   -Q "SELECT @@VERSION" -C
 ```
 
@@ -164,7 +164,7 @@ docker restart sql1
 
 # Wait 10 seconds, then test
 docker exec -it sql1 /opt/mssql-tools18/bin/sqlcmd \
-  -S localhost -U sa -P 'gukukr6rg#67' \
+  -S localhost -U sa -P 'YOUR_STRONG_PASSWORD_HERE' \
   -Q "SELECT 1" -C
 ```
 
@@ -212,7 +212,7 @@ cat .env | grep SQL_USE_WINDOWS_AUTH  # Should be false
 
 # 6. Test connection
 docker exec sql1 /opt/mssql-tools18/bin/sqlcmd \
-  -S localhost -U sa -P 'gukukr6rg#67' \
+  -S localhost -U sa -P 'YOUR_STRONG_PASSWORD_HERE' \
   -Q "SELECT @@VERSION" -C
 
 # 7. Test MCP server

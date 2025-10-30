@@ -16,7 +16,15 @@
     "rag",
     "macos"
   ],
-  "author": "",
+  "author": "Tharana Bope <tharanabope@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows/issues"
+  },
+  "homepage": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows#readme",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",

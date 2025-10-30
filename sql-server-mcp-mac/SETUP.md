@@ -36,7 +36,7 @@ npm run build
   "mcpServers": {
     "sql-server": {
       "command": "node",
-      "args": ["D:\\Medical Wizard\\VFP Entire Codebase\\MCP\\sql-server-mcp\\dist\\index.js"],
+      "args": ["/path/to/sql-server-mcp/dist/index.js"],
       "env": {
         "SQL_SERVER": "localhost",
         "SQL_DATABASE": "master",
@@ -63,7 +63,7 @@ If you use SQL Server username/password:
   "mcpServers": {
     "sql-server": {
       "command": "node",
-      "args": ["D:\\Medical Wizard\\VFP Entire Codebase\\MCP\\sql-server-mcp\\dist\\index.js"],
+      "args": ["/path/to/sql-server-mcp/dist/index.js"],
       "env": {
         "SQL_SERVER": "localhost",
         "SQL_DATABASE": "YourDatabase",

@@ -45,7 +45,7 @@ Download from Microsoft:
 
 **Solution**: Install dependencies
 ```bash
-cd "d:\Medical Wizard\VFP Entire Codebase\MCP\sql-server-mcp"
+cd "/path/to/sql-server-mcp"
 npm install
 ```
 
@@ -93,7 +93,7 @@ npm install
 2. Connect as administrator (sa or admin account)
 3. Expand Security → Logins
 4. Right-click Logins → New Login
-5. Add your Windows account: `THARANA\thara`
+5. Add your Windows account: `YOUR-DOMAIN\YourUsername`
 6. Grant appropriate permissions
 7. Map user to databases (User Mapping tab)
 
@@ -104,7 +104,7 @@ npm install
 - Check network connectivity
 - Verify SQL Server is accepting remote connections
 
-### 6. "Database 'MWVGDB' does not exist"
+### 6. "Database 'YourDatabase' does not exist"
 
 **Verify database name**:
 ```sql
@@ -115,7 +115,7 @@ SELECT name FROM sys.databases;
 **Check permissions**:
 ```sql
 -- Check if user has access:
-SELECT * FROM sys.database_principals WHERE name = 'THARANA\thara';
+SELECT * FROM sys.database_principals WHERE name = 'YOUR-DOMAIN\YourUsername';
 ```
 
 ---
@@ -135,7 +135,7 @@ List all databases on the server
 
 ### 3. Test specific database
 ```
-Show me all tables in the MWVGDB database
+Show me all tables in the YourDatabase database
 ```
 
 ### 4. Check logs
@@ -153,10 +153,10 @@ Your current config (`claude_desktop_config.json`):
   "mcpServers": {
     "sql-server": {
       "command": "node",
-      "args": ["D:\\Medical Wizard\\VFP Entire Codebase\\MCP\\sql-server-mcp\\dist\\index.js"],
+      "args": ["/path/to/sql-server-mcp/dist/index.js"],
       "env": {
-        "SQL_SERVER": "THARANA",
-        "SQL_DATABASE": "MWVGDB",
+        "SQL_SERVER": "YOUR-SERVER-NAME",
+        "SQL_DATABASE": "YourDatabase",
         "SQL_USE_WINDOWS_AUTH": "true",
         "SQL_PORT": "1433",
         "QUERY_TIMEOUT": "30",
@@ -170,9 +170,9 @@ Your current config (`claude_desktop_config.json`):
 ```
 
 ### Key settings:
-- `SQL_SERVER`: Should match your server name from SSMS (currently: `THARANA`)
+- `SQL_SERVER`: Should match your server name from SSMS (currently: `YOUR-SERVER-NAME`)
 - `SQL_USE_WINDOWS_AUTH`: Should be `"true"` for Windows Authentication
-- `SQL_DATABASE`: Target database (currently: `MWVGDB`)
+- `SQL_DATABASE`: Target database (currently: `YourDatabase`)
 
 ---
 
@@ -183,7 +183,7 @@ If Windows Authentication continues to have issues, you can use SQL Server Authe
 ### 1. Create SQL Server login (in SSMS):
 ```sql
 CREATE LOGIN mcp_user WITH PASSWORD = 'YourStrongPassword123!';
-USE MWVGDB;
+USE YourDatabase;
 CREATE USER mcp_user FOR LOGIN mcp_user;
 GRANT SELECT ON SCHEMA::dbo TO mcp_user;
 ```
@@ -191,8 +191,8 @@ GRANT SELECT ON SCHEMA::dbo TO mcp_user;
 ### 2. Update config:
 ```json
 "env": {
-  "SQL_SERVER": "THARANA",
-  "SQL_DATABASE": "MWVGDB",
+  "SQL_SERVER": "YOUR-SERVER-NAME",
+  "SQL_DATABASE": "YourDatabase",
   "SQL_USE_WINDOWS_AUTH": "false",
   "SQL_USERNAME": "mcp_user",
   "SQL_PASSWORD": "YourStrongPassword123!",

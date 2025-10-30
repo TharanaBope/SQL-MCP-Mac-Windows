@@ -2,7 +2,7 @@
   "mcpServers": {
     "sql-server": {
       "command": "node",
-      "args": ["D:\\Medical Wizard\\VFP Entire Codebase\\MCP\\sql-server-mcp\\dist\\index.js"],
+      "args": ["/path/to/sql-server-mcp/dist/index.js"],
       "env": {
         "SQL_SERVER": "localhost",
         "SQL_DATABASE": "master",

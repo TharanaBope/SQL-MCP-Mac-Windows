@@ -31,7 +31,7 @@ docker start sql1
 
 # Test connection
 docker exec -it sql1 /opt/mssql-tools18/bin/sqlcmd \
-  -S localhost -U sa -P 'gukukr6rg#67' \
+  -S localhost -U sa -P 'YOUR_SA_PASSWORD' \
   -Q "SELECT @@VERSION" -C
 ```
 
@@ -95,7 +95,7 @@ node dist/index.js
         "SQL_SERVER": "localhost",
         "SQL_DATABASE": "master",
         "SQL_USERNAME": "sa",
-        "SQL_PASSWORD": "gukukr6rg#67",
+        "SQL_PASSWORD": "YOUR_STRONG_PASSWORD_HERE",
         "SQL_USE_WINDOWS_AUTH": "false"
       }
     }

@@ -89,7 +89,7 @@ SQL_DATABASE=master
 SQL_PORT=1433
 SQL_USE_WINDOWS_AUTH=false
 SQL_USERNAME=sa
-SQL_PASSWORD=gukukr6rg#67
+SQL_PASSWORD=YOUR_STRONG_PASSWORD_HERE
 
 # Cache Settings
 CACHE_TTL_MINUTES=60
@@ -111,7 +111,7 @@ echo "🧪 Testing connection..."
 echo ""
 
 # Test SQL Server connection
-if docker exec sql1 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'gukukr6rg#67' -Q "SELECT @@VERSION" -C &> /dev/null; then
+if docker exec sql1 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'YOUR_SA_PASSWORD' -Q "SELECT @@VERSION" -C &> /dev/null; then
     echo "✅ SQL Server connection successful!"
 else
     echo "⚠️  Could not connect to SQL Server"
