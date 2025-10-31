@@ -6,7 +6,7 @@
 [![npm version](https://img.shields.io/npm/v/@tharanabopearachchi/sql-server-mcp.svg)](https://www.npmjs.com/package/@tharanabopearachchi/sql-server-mcp)
 [![npm downloads](https://img.shields.io/npm/dm/@tharanabopearachchi/sql-server-mcp.svg)](https://www.npmjs.com/package/@tharanabopearachchi/sql-server-mcp)
 
-A **Model Context Protocol (MCP)** server implementation for SQL Server that enables AI assistants (like Claude and LM Studio) to explore and query SQL Server databases through natural language. Built as a RAG (Retrieval-Augmented Generation) system optimized for database knowledge exploration.
+A **Model Context Protocol (MCP)** server implementation for SQL Server that enables AI assistants to explore and query SQL Server databases through natural language. Built as a RAG (Retrieval-Augmented Generation) system optimized for database knowledge exploration.
 
 ## 🌟 Features
 
@@ -43,9 +43,11 @@ This server is officially published in the [Model Context Protocol Registry](htt
 
 ### 🚀 Quick Start (Recommended)
 
-No installation needed! Just add to your Claude Desktop configuration:
+No installation needed! Just add to your AI assistant's configuration:
 
-#### **Windows**
+#### **Claude Desktop (Windows)**
+**Config Location**: `%APPDATA%\Claude\claude_desktop_config.json`
+
 ```json
 {
   "mcpServers": {
@@ -62,7 +64,9 @@ No installation needed! Just add to your Claude Desktop configuration:
 }
 ```
 
-#### **macOS**
+#### **Claude Desktop (macOS)**
+**Config Location**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
 ```json
 {
   "mcpServers": {
@@ -81,7 +85,108 @@ No installation needed! Just add to your Claude Desktop configuration:
 }
 ```
 
-Restart Claude Desktop and you're ready to go!
+<details>
+<summary><b>LM Studio Configuration</b></summary>
+
+**Config Location**: Varies by platform
+- Windows: `%USERPROFILE%\.lmstudio\config.json`
+- macOS: `~/.lmstudio/config.json`
+
+```json
+{
+  "mcpServers": {
+    "sql-server": {
+      "command": "npx",
+      "args": ["-y", "@tharanabopearachchi/sql-server-mcp@latest"],
+      "env": {
+        "SQL_SERVER": "localhost",
+        "SQL_DATABASE": "master",
+        "SQL_USE_WINDOWS_AUTH": "true",
+        "SQL_USERNAME": "",
+        "SQL_PASSWORD": ""
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>VS Code with Continue Extension</b></summary>
+
+**Config Location**: `~/.continue/config.json`
+
+```json
+{
+  "experimental": {
+    "modelContextProtocolServers": [
+      {
+        "transport": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@tharanabopearachchi/sql-server-mcp@latest"]
+        },
+        "env": {
+          "SQL_SERVER": "localhost",
+          "SQL_DATABASE": "master",
+          "SQL_USE_WINDOWS_AUTH": "true"
+        }
+      }
+    ]
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Cursor IDE</b></summary>
+
+**Config Location**: Cursor Settings → Features → Model Context Protocol
+
+```json
+{
+  "mcpServers": {
+    "sql-server": {
+      "command": "npx",
+      "args": ["-y", "@tharanabopearachchi/sql-server-mcp@latest"],
+      "env": {
+        "SQL_SERVER": "localhost",
+        "SQL_DATABASE": "master",
+        "SQL_USE_WINDOWS_AUTH": "true"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Cline (VS Code Extension)</b></summary>
+
+**Config Location**: VS Code Settings → Cline → MCP Settings
+
+```json
+{
+  "mcpServers": {
+    "sql-server": {
+      "command": "npx",
+      "args": ["-y", "@tharanabopearachchi/sql-server-mcp@latest"],
+      "env": {
+        "SQL_SERVER": "localhost",
+        "SQL_DATABASE": "master",
+        "SQL_USE_WINDOWS_AUTH": "true"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+Restart your AI assistant and you're ready to go!
 
 ### 🛠️ Development Setup
 
@@ -127,9 +232,9 @@ The server provides **12 powerful tools** for database exploration:
 ### Query Execution
 - `execute_query` - Execute read-only SELECT queries safely
 
-## 💬 Example Usage with Claude
+## 💬 Example Usage
 
-Once configured, you can ask Claude:
+Once configured, you can ask your AI assistant:
 
 ```
 "What databases are available on this server?"
