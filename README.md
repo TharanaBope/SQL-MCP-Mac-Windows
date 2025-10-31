@@ -18,6 +18,14 @@ A **Model Context Protocol (MCP)** server implementation for SQL Server that ena
 - 🔐 **Security First** - Read-only by default, SQL injection prevention, query validation
 - 🖥️ **Cross-Platform** - Native Windows Authentication & macOS Docker support
 
+## 🎥 Demo
+
+See SQL Server MCP in action with AI assistant integration:
+
+https://github.com/TharanaBope/SQL-MCP-Mac-Windows/assets/SQL-MCP_Vid.mp4
+
+> **Note:** Watch how natural language queries instantly explore database schemas, find relationships, and retrieve data - all without leaving your AI assistant!
+
 ## 🚀 Quick Start
 
 This repository contains **two platform-specific implementations**:
