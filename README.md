@@ -22,7 +22,7 @@ A **Model Context Protocol (MCP)** server implementation for SQL Server that ena
 
 See SQL Server MCP in action with AI assistant integration:
 
-https://github.com/TharanaBope/SQL-MCP-Mac-Windows/assets/SQL-MCP_Vid.mp4
+![SQL Server MCP Demo](./demo.gif)
 
 > **Note:** Watch how natural language queries instantly explore database schemas, find relationships, and retrieve data - all without leaving your AI assistant!
 
