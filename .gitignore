@@ -2,3 +2,14 @@
 
 # Terminal Paste Image folder
 .cp-images/
+
+# MCP Registry authentication tokens
+.mcpregistry_github_token
+.mcpregistry_registry_token
+
+# MCP Publisher executable
+mcp-publisher.exe
+*.exe
+
+# Personal research and notes
+research.md

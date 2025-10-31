@@ -1,6 +1,7 @@
 {
   "name": "@tharanabopearachchi/sql-server-mcp",
-  "version": "1.0.0",
+  "version": "1.0.3",
+  "mcpName": "io.github.TharanaBope/sql-server-mcp",
   "description": "MCP server for SQL Server database exploration and RAG capabilities (Windows with native ODBC support)",
   "type": "module",
   "main": "dist/index.js",

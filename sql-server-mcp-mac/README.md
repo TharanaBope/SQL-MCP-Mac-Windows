@@ -33,18 +33,39 @@ A Model Context Protocol (MCP) server for SQL Server that enables AI assistants 
 
 ## Installation
 
-### Prerequisites
-- Node.js 18.x or higher
-- SQL Server (local or remote)
-- Windows Authentication or SQL Server Authentication credentials
+### 🎉 Published on NPM & MCP Registry!
 
-### Setup
+**NPM Package**: [@tharanabopearachchi/sql-server-mcp-macos](https://www.npmjs.com/package/@tharanabopearachchi/sql-server-mcp-macos)
+**MCP Registry**: `io.github.TharanaBope/sql-server-mcp-macos`
+
+### 🚀 Quick Install (Recommended)
+
+**Zero Installation via npx**:
+```bash
+npx @tharanabopearachchi/sql-server-mcp-macos
+```
+
+**Or install globally**:
+```bash
+npm install -g @tharanabopearachchi/sql-server-mcp-macos
+```
+
+### 🛠️ Development Setup
+
+For local development or modifications:
+
+**Prerequisites**:
+- Node.js 18.x or higher
+- SQL Server (local or remote - Docker recommended for macOS)
+- SQL Server Authentication credentials
+
+**Steps**:
 
 1. **Clone or download this repository**
 
 2. **Install dependencies**
 ```bash
-cd sql-server-mcp
+cd sql-server-mcp-mac
 npm install
 ```
 
@@ -64,7 +85,9 @@ Edit `.env` with your settings:
 SQL_SERVER=localhost
 SQL_DATABASE=master
 SQL_PORT=1433
-SQL_USE_WINDOWS_AUTH=true
+SQL_USE_WINDOWS_AUTH=false
+SQL_USERNAME=sa
+SQL_PASSWORD=your_password
 QUERY_TIMEOUT=30
 MAX_RESULT_ROWS=1000
 ```

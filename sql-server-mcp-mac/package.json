@@ -1,11 +1,12 @@
 {
   "name": "@tharanabopearachchi/sql-server-mcp-macos",
-  "version": "1.0.0",
+  "version": "1.0.3",
+  "mcpName": "io.github.TharanaBope/sql-server-mcp-macos",
   "description": "MCP server for SQL Server database exploration and RAG capabilities (macOS with Docker SQL Server support)",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "sql-server-mcp-macos": "./dist/index.js"
+    "sql-server-mcp-macos": "dist/index.js"
   },
   "files": [
     "dist",
@@ -35,7 +36,7 @@
   "author": "Tharana Bope <tharanabope@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows.git"
+    "url": "git+https://github.com/TharanaBope/SQL-MCP-Mac-Windows.git"
   },
   "bugs": {
     "url": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows/issues"

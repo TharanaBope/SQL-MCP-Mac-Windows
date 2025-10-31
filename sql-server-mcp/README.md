@@ -33,12 +33,33 @@ A Model Context Protocol (MCP) server for SQL Server that enables AI assistants 
 
 ## Installation
 
-### Prerequisites
+### 🎉 Published on NPM & MCP Registry!
+
+**NPM Package**: [@tharanabopearachchi/sql-server-mcp](https://www.npmjs.com/package/@tharanabopearachchi/sql-server-mcp)
+**MCP Registry**: `io.github.TharanaBope/sql-server-mcp`
+
+### 🚀 Quick Install (Recommended)
+
+**Zero Installation via npx**:
+```bash
+npx @tharanabopearachchi/sql-server-mcp
+```
+
+**Or install globally**:
+```bash
+npm install -g @tharanabopearachchi/sql-server-mcp
+```
+
+### 🛠️ Development Setup
+
+For local development or modifications:
+
+**Prerequisites**:
 - Node.js 18.x or higher
 - SQL Server (local or remote)
 - Windows Authentication or SQL Server Authentication credentials
 
-### Setup
+**Steps**:
 
 1. **Clone or download this repository**
 

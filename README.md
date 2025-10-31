@@ -35,6 +35,12 @@ This repository contains **two platform-specific implementations**:
 
 ## 📦 Installation
 
+### 🎉 Now Available on MCP Registry!
+
+This server is officially published in the [Model Context Protocol Registry](https://registry.modelcontextprotocol.io):
+- **Windows**: `io.github.TharanaBope/sql-server-mcp`
+- **macOS**: `io.github.TharanaBope/sql-server-mcp-macos`
+
 ### 🚀 Quick Start (Recommended)
 
 No installation needed! Just add to your Claude Desktop configuration:

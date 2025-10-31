@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+  "name": "io.github.TharanaBope/sql-server-mcp",
+  "description": "SQL Server MCP with RAG capabilities for Windows (native ODBC support)",
+  "title": "SQL Server MCP (Windows)",
+  "repository": {
+    "url": "https://github.com/TharanaBope/SQL-MCP-Mac-Windows",
+    "source": "github"
+  },
+  "version": "1.0.3",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@tharanabopearachchi/sql-server-mcp",
+      "version": "1.0.3",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
