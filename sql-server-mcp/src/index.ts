@@ -30,6 +30,34 @@ const config: SQLServerConfig = {
   enableWriteOperations: process.env.ENABLE_WRITE_OPERATIONS === 'true',
 };
 
+// Zod schemas for tool argument validation
+const ListDatabasesArgs = z.object({
+  includeSystem: z.boolean().optional().default(false),
+});
+const DatabaseArgs = z.object({
+  database: z.string().min(1),
+});
+const TableArgs = z.object({
+  database: z.string().min(1),
+  tableName: z.string().min(1),
+});
+const SearchArgs = z.object({
+  database: z.string().min(1),
+  searchTerm: z.string().min(1),
+});
+const ColumnArgs = z.object({
+  database: z.string().min(1),
+  columnName: z.string().min(1),
+});
+const ProcedureArgs = z.object({
+  database: z.string().min(1),
+  procedureName: z.string().min(1),
+});
+const QueryArgs = z.object({
+  database: z.string().min(1),
+  query: z.string().min(1),
+});
+
 // Initialize cache
 const cache = getCache(
   parseInt(process.env.CACHE_TTL_MINUTES || '60'),
@@ -280,9 +308,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       await connection.connect();
     }
 
-    // Check database access
-    if (args?.database && config.allowedDatabases && config.allowedDatabases.length > 0) {
+    // Check database access — default-deny when allowlist is unconfigured
+    if (args?.database) {
       const dbName = args.database as string;
+      if (!config.allowedDatabases || config.allowedDatabases.length === 0) {
+        throw new Error(
+          'Database access is blocked: SQL_ALLOWED_DATABASES is not configured. ' +
+          'Set this environment variable to a comma-separated list of allowed database names.'
+        );
+      }
       if (!config.allowedDatabases.includes(dbName)) {
         throw new Error(
           `Access denied to database "${dbName}". Allowed databases: ${config.allowedDatabases.join(', ')}`
@@ -292,11 +326,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     switch (name) {
       case 'list_databases': {
-        const cacheKey = generateCacheKey('list_databases', String(args?.includeSystem));
+        const { includeSystem } = ListDatabasesArgs.parse(args ?? {});
+        const cacheKey = generateCacheKey('list_databases', String(includeSystem));
         let result = cache.get(cacheKey);
 
         if (!result) {
-          result = await schemaTools.listDatabases(args?.includeSystem as boolean);
+          result = await schemaTools.listDatabases(includeSystem);
           cache.set(cacheKey, result);
         }
 
@@ -311,7 +346,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'list_tables': {
-        const db = args?.database as string;
+        const { database: db } = DatabaseArgs.parse(args);
         const cacheKey = generateCacheKey('list_tables', db);
         let result = cache.get(cacheKey);
 
@@ -331,8 +366,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'describe_table': {
-        const db = args?.database as string;
-        const table = args?.tableName as string;
+        const { database: db, tableName: table } = TableArgs.parse(args);
         const cacheKey = generateCacheKey('describe_table', db, table);
         let result = cache.get(cacheKey);
 
@@ -352,8 +386,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'get_table_relationships': {
-        const db = args?.database as string;
-        const table = args?.tableName as string;
+        const { database: db, tableName: table } = TableArgs.parse(args);
         const result = await relationshipTools.getTableRelationships(db, table);
 
         return {
@@ -367,8 +400,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'search_schema': {
-        const db = args?.database as string;
-        const term = args?.searchTerm as string;
+        const { database: db, searchTerm: term } = SearchArgs.parse(args);
         const result = await searchTools.searchSchema(db, term);
 
         return {
@@ -382,8 +414,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'find_column_usage': {
-        const db = args?.database as string;
-        const column = args?.columnName as string;
+        const { database: db, columnName: column } = ColumnArgs.parse(args);
         const result = await searchTools.findColumnByName(db, column);
 
         return {
@@ -397,7 +428,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'list_stored_procedures': {
-        const db = args?.database as string;
+        const { database: db } = DatabaseArgs.parse(args);
         const cacheKey = generateCacheKey('list_procedures', db);
         let result = cache.get(cacheKey);
 
@@ -417,8 +448,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'get_procedure_definition': {
-        const db = args?.database as string;
-        const proc = args?.procedureName as string;
+        const { database: db, procedureName: proc } = ProcedureArgs.parse(args);
         const result = await schemaTools.getStoredProcedureDefinition(db, proc);
 
         return {
@@ -432,7 +462,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'list_views': {
-        const db = args?.database as string;
+        const { database: db } = DatabaseArgs.parse(args);
         const cacheKey = generateCacheKey('list_views', db);
         let result = cache.get(cacheKey);
 
@@ -452,7 +482,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'get_database_overview': {
-        const db = args?.database as string;
+        const { database: db } = DatabaseArgs.parse(args);
         const cacheKey = generateCacheKey('overview', db);
         let result = cache.get(cacheKey);
 
@@ -472,8 +502,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'execute_query': {
-        const db = args?.database as string;
-        const query = args?.query as string;
+        const { database: db, query } = QueryArgs.parse(args);
         const result = await queryTools.executeSelectQuery(db, query);
 
         return {
@@ -487,8 +516,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'get_related_tables': {
-        const db = args?.database as string;
-        const table = args?.tableName as string;
+        const { database: db, tableName: table } = TableArgs.parse(args);
         const result = await relationshipTools.getRelatedTables(db, table);
 
         return {

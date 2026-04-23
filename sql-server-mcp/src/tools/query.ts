@@ -39,7 +39,7 @@ export class QueryTools {
   private isReadOnlyQuery(query: string): boolean {
     const normalizedQuery = query.trim().toUpperCase();
 
-    // Block any write operations
+    // Block write and dangerous operations
     const writeOperations = [
       'INSERT',
       'UPDATE',
@@ -52,11 +52,27 @@ export class QueryTools {
       'EXECUTE',
       'SP_',
       'XP_',
+      'SP_EXECUTESQL',
+      'OPENROWSET',
+      'OPENQUERY',
+      'WAITFOR',
+      'BULK',
+      'OPENDATASOURCE',
     ];
 
     for (const op of writeOperations) {
       if (normalizedQuery.includes(op)) {
         return false;
+      }
+    }
+
+    // Block multi-statement bypass: reject if any blocked keyword appears after a semicolon
+    if (normalizedQuery.includes(';')) {
+      const afterSemicolon = normalizedQuery.substring(normalizedQuery.indexOf(';') + 1);
+      for (const op of writeOperations) {
+        if (afterSemicolon.includes(op)) {
+          return false;
+        }
       }
     }
 

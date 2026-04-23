@@ -31,7 +31,7 @@ export const QUERIES = {
     SELECT
       t.name AS tableName,
       s.name AS schemaName,
-      p.rows AS rowCount,
+      p.[rows] AS [rowCount],
       t.type_desc AS tableType
     FROM sys.tables t
     INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
@@ -59,7 +59,7 @@ export const QUERIES = {
     ) pk ON c.object_id = pk.object_id AND c.column_id = pk.column_id
     LEFT JOIN sys.foreign_key_columns fk ON c.object_id = fk.parent_object_id AND c.column_id = fk.parent_column_id
     LEFT JOIN sys.default_constraints dc ON c.default_object_id = dc.object_id
-    WHERE c.object_id = OBJECT_ID(@tableName)
+    WHERE c.object_id = OBJECT_ID(@param0)
     ORDER BY c.column_id;
   `,
 
@@ -73,7 +73,7 @@ export const QUERIES = {
       OBJECT_SCHEMA_NAME(fkc.referenced_object_id) AS referencedSchema
     FROM sys.foreign_keys fk
     INNER JOIN sys.foreign_key_columns fkc ON fk.object_id = fkc.constraint_object_id
-    WHERE fk.parent_object_id = OBJECT_ID(@tableName)
+    WHERE fk.parent_object_id = OBJECT_ID(@param0)
     ORDER BY fk.name;
   `,
 
@@ -86,7 +86,7 @@ export const QUERIES = {
       i.is_primary_key AS isPrimaryKey
     FROM sys.indexes i
     INNER JOIN sys.index_columns ic ON i.object_id = ic.object_id AND i.index_id = ic.index_id
-    WHERE i.object_id = OBJECT_ID(@tableName)
+    WHERE i.object_id = OBJECT_ID(@param0)
     ORDER BY i.name, ic.key_ordinal;
   `,
 
@@ -116,12 +116,12 @@ export const QUERIES = {
 
   // Get stored procedure definition
   GET_PROCEDURE_DEFINITION: `
-    SELECT OBJECT_DEFINITION(OBJECT_ID(@procedureName)) AS definition;
+    SELECT OBJECT_DEFINITION(OBJECT_ID(@param0)) AS definition;
   `,
 
   // Get view definition
   GET_VIEW_DEFINITION: `
-    SELECT OBJECT_DEFINITION(OBJECT_ID(@viewName)) AS definition;
+    SELECT OBJECT_DEFINITION(OBJECT_ID(@param0)) AS definition;
   `,
 
   // Search for tables by name
@@ -132,7 +132,7 @@ export const QUERIES = {
       'table' AS objectType
     FROM sys.tables t
     INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
-    WHERE t.name LIKE @searchTerm
+    WHERE t.name LIKE @param0
     ORDER BY s.name, t.name;
   `,
 
@@ -148,7 +148,7 @@ export const QUERIES = {
     INNER JOIN sys.tables t ON c.object_id = t.object_id
     INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
     INNER JOIN sys.types ty ON c.user_type_id = ty.user_type_id
-    WHERE c.name LIKE @searchTerm
+    WHERE c.name LIKE @param0
     ORDER BY s.name, t.name, c.name;
   `,
 
@@ -160,7 +160,7 @@ export const QUERIES = {
       'procedure' AS objectType
     FROM sys.procedures p
     INNER JOIN sys.schemas s ON p.schema_id = s.schema_id
-    WHERE p.name LIKE @searchTerm
+    WHERE p.name LIKE @param0
     ORDER BY s.name, p.name;
   `,
 
@@ -171,7 +171,7 @@ export const QUERIES = {
       OBJECT_SCHEMA_NAME(fk.parent_object_id) AS dependentSchema,
       fk.name AS constraintName
     FROM sys.foreign_keys fk
-    WHERE fk.referenced_object_id = OBJECT_ID(@tableName)
+    WHERE fk.referenced_object_id = OBJECT_ID(@param0)
     ORDER BY dependentSchema, dependentTable;
   `,
 
@@ -195,7 +195,7 @@ export const QUERIES = {
       WHERE i.is_primary_key = 1
     ) pk ON c.object_id = pk.object_id AND c.column_id = pk.column_id
     LEFT JOIN sys.foreign_key_columns fk ON c.object_id = fk.parent_object_id AND c.column_id = fk.parent_column_id
-    WHERE c.name = @columnName
+    WHERE c.name = @param0
     ORDER BY s.name, t.name;
   `,
 

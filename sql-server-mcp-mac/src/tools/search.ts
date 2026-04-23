@@ -12,15 +12,9 @@ export class SearchTools {
 
     // Search across tables, columns, and procedures in parallel
     const [tables, columns, procedures] = await Promise.all([
-      this.connection.executeQuery(
-        QUERIES.SEARCH_TABLES.replace('@searchTerm', `'${searchPattern}'`)
-      ),
-      this.connection.executeQuery(
-        QUERIES.SEARCH_COLUMNS.replace('@searchTerm', `'${searchPattern}'`)
-      ),
-      this.connection.executeQuery(
-        QUERIES.SEARCH_PROCEDURES.replace('@searchTerm', `'${searchPattern}'`)
-      ),
+      this.connection.executeQuery(QUERIES.SEARCH_TABLES, [searchPattern]),
+      this.connection.executeQuery(QUERIES.SEARCH_COLUMNS, [searchPattern]),
+      this.connection.executeQuery(QUERIES.SEARCH_PROCEDURES, [searchPattern]),
     ]);
 
     const results: SchemaSearchResult[] = [
@@ -49,32 +43,24 @@ export class SearchTools {
   async searchTables(database: string, searchTerm: string): Promise<any[]> {
     await this.connection.executeQuery(`USE [${database}]`);
     const searchPattern = `%${searchTerm}%`;
-    return await this.connection.executeQuery(
-      QUERIES.SEARCH_TABLES.replace('@searchTerm', `'${searchPattern}'`)
-    );
+    return await this.connection.executeQuery(QUERIES.SEARCH_TABLES, [searchPattern]);
   }
 
   async searchColumns(database: string, searchTerm: string): Promise<any[]> {
     await this.connection.executeQuery(`USE [${database}]`);
     const searchPattern = `%${searchTerm}%`;
-    return await this.connection.executeQuery(
-      QUERIES.SEARCH_COLUMNS.replace('@searchTerm', `'${searchPattern}'`)
-    );
+    return await this.connection.executeQuery(QUERIES.SEARCH_COLUMNS, [searchPattern]);
   }
 
   async findColumnByName(database: string, columnName: string): Promise<any[]> {
     await this.connection.executeQuery(`USE [${database}]`);
-    return await this.connection.executeQuery(
-      QUERIES.FIND_COLUMN_USAGE.replace('@columnName', `'${columnName}'`)
-    );
+    return await this.connection.executeQuery(QUERIES.FIND_COLUMN_USAGE, [columnName]);
   }
 
   async searchStoredProcedures(database: string, searchTerm: string): Promise<any[]> {
     await this.connection.executeQuery(`USE [${database}]`);
     const searchPattern = `%${searchTerm}%`;
-    return await this.connection.executeQuery(
-      QUERIES.SEARCH_PROCEDURES.replace('@searchTerm', `'${searchPattern}'`)
-    );
+    return await this.connection.executeQuery(QUERIES.SEARCH_PROCEDURES, [searchPattern]);
   }
 
   async globalSearch(searchTerm: string, databases: string[]): Promise<{

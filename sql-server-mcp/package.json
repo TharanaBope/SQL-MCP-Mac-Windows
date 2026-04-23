@@ -1,6 +1,6 @@
 {
   "name": "@tharanabopearachchi/sql-server-mcp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "mcpName": "io.github.TharanaBope/sql-server-mcp",
   "description": "MCP server for SQL Server database exploration and RAG capabilities (Windows with native ODBC support)",
   "type": "module",
@@ -45,7 +45,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
     "msnodesqlv8": "^4.2.1",
-    "mssql": "^11.0.1",
+    "mssql": "^12.4.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {

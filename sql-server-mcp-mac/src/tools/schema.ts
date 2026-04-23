@@ -36,15 +36,9 @@ export class SchemaTools {
 
     // Execute queries in parallel for better performance
     const [columns, foreignKeys, indexes] = await Promise.all([
-      this.connection.executeQuery<ColumnInfo>(
-        QUERIES.DESCRIBE_TABLE.replace('@tableName', `'${fullTableName}'`)
-      ),
-      this.connection.executeQuery<ForeignKeyInfo>(
-        QUERIES.GET_FOREIGN_KEYS.replace('@tableName', `'${fullTableName}'`)
-      ),
-      this.connection.executeQuery<IndexInfo>(
-        QUERIES.GET_INDEXES.replace('@tableName', `'${fullTableName}'`)
-      ),
+      this.connection.executeQuery<ColumnInfo>(QUERIES.DESCRIBE_TABLE, [fullTableName]),
+      this.connection.executeQuery<ForeignKeyInfo>(QUERIES.GET_FOREIGN_KEYS, [fullTableName]),
+      this.connection.executeQuery<IndexInfo>(QUERIES.GET_INDEXES, [fullTableName]),
     ]);
 
     return { columns, foreignKeys, indexes };
@@ -71,7 +65,7 @@ export class SchemaTools {
       ? procedureName
       : `dbo.${procedureName}`;
     const result = await this.connection.executeQuery<{ definition: string }>(
-      QUERIES.GET_PROCEDURE_DEFINITION.replace('@procedureName', `'${fullProcName}'`)
+      QUERIES.GET_PROCEDURE_DEFINITION, [fullProcName]
     );
     return result[0]?.definition || '';
   }
@@ -80,7 +74,7 @@ export class SchemaTools {
     await this.connection.executeQuery(`USE [${database}]`);
     const fullViewName = viewName.includes('.') ? viewName : `dbo.${viewName}`;
     const result = await this.connection.executeQuery<{ definition: string }>(
-      QUERIES.GET_VIEW_DEFINITION.replace('@viewName', `'${fullViewName}'`)
+      QUERIES.GET_VIEW_DEFINITION, [fullViewName]
     );
     return result[0]?.definition || '';
   }

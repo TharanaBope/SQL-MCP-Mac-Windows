@@ -1,6 +1,6 @@
 {
   "name": "@tharanabopearachchi/sql-server-mcp-macos",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "mcpName": "io.github.TharanaBope/sql-server-mcp-macos",
   "description": "MCP server for SQL Server database exploration and RAG capabilities (macOS with Docker SQL Server support)",
   "type": "module",
@@ -45,7 +45,7 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
-    "mssql": "^11.0.1",
+    "mssql": "^12.4.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {

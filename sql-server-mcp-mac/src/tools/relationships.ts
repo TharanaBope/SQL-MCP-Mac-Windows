@@ -14,12 +14,12 @@ export class RelationshipTools {
 
     // Get outgoing foreign keys (this table references others)
     const outgoingReferences = await this.connection.executeQuery<ForeignKeyInfo>(
-      QUERIES.GET_FOREIGN_KEYS.replace('@tableName', `'${fullTableName}'`)
+      QUERIES.GET_FOREIGN_KEYS, [fullTableName]
     );
 
     // Get incoming references (other tables reference this table)
     const incomingReferences = await this.connection.executeQuery(
-      QUERIES.GET_TABLE_DEPENDENCIES.replace('@tableName', `'${fullTableName}'`)
+      QUERIES.GET_TABLE_DEPENDENCIES, [fullTableName]
     );
 
     return { outgoingReferences, incomingReferences };
@@ -29,16 +29,12 @@ export class RelationshipTools {
     await this.connection.executeQuery(`USE [${database}]`);
     const fullTableName = tableName.includes('.') ? tableName : `dbo.${tableName}`;
 
-    return await this.connection.executeQuery(
-      QUERIES.GET_TABLE_DEPENDENCIES.replace('@tableName', `'${fullTableName}'`)
-    );
+    return await this.connection.executeQuery(QUERIES.GET_TABLE_DEPENDENCIES, [fullTableName]);
   }
 
   async analyzeColumnUsage(database: string, columnName: string): Promise<any[]> {
     await this.connection.executeQuery(`USE [${database}]`);
-    return await this.connection.executeQuery(
-      QUERIES.FIND_COLUMN_USAGE.replace('@columnName', `'${columnName}'`)
-    );
+    return await this.connection.executeQuery(QUERIES.FIND_COLUMN_USAGE, [columnName]);
   }
 
   async getRelatedTables(database: string, tableName: string): Promise<{
